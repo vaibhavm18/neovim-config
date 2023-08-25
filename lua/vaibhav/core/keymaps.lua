@@ -1,9 +1,6 @@
-
 vim.g.mapleader = " "
 
-
 local keymap = vim.keymap
-
 
 -- General keymaps
 keymap.set("n", "<leader>e", "<cmd>:Ex<CR>", {})

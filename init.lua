@@ -1,4 +1,2 @@
-print("hello")
-
-require "vaibhav.core"
-require "vaibhav.lazy"
+require("vaibhav.core")
+require("vaibhav.lazy")
