@@ -4,6 +4,7 @@ return {
 	dependencies = {
 		"jose-elias-alvarez/typescript.nvim",
 		"hrsh7th/cmp-nvim-lsp",
+		"simrat39/rust-tools.nvim",
 		{
 			"smjonas/inc-rename.nvim",
 			config = true,
@@ -64,7 +65,7 @@ return {
 			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
 			opts.desc = "Restart LSP"
-			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+			keymap.set("n", "<leader>r", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 
 			-- typescript specific keymaps (e.g. rename file and update imports)
 			if client.name == "tsserver" then
@@ -92,6 +93,12 @@ return {
 
 		-- configure html server
 		lspconfig["html"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- configure html server
+		lspconfig["rust-analyzer"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
