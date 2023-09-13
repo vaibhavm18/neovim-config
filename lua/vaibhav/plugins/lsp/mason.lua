@@ -27,6 +27,7 @@ return {
 				"lua_ls",
 				"emmet_ls",
 				"clangd",
+				"rust-analyzer",
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed
