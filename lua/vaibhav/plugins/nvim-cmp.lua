@@ -8,9 +8,14 @@ return {
 		"saadparwaiz1/cmp_luasnip", -- for autocompletion
 		"rafamadriz/friendly-snippets", -- useful snippets
 		"onsails/lspkind.nvim", -- vs-code like pictograms
+		"roobert/tailwindcss-colorizer-cmp.nvim",
 	},
 	config = function()
 		local cmp = require("cmp")
+
+		cmp.config.formatting = {
+			format = require("tailwindcss-colorizer-cmp").formatter,
+		}
 
 		local luasnip = require("luasnip")
 

@@ -28,7 +28,6 @@ return {
 					"javascript",
 					"typescript",
 					"tsx",
-					"yaml",
 					"html",
 					"css",
 					"prisma",
