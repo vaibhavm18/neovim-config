@@ -27,14 +27,16 @@ return {
     mason_lspconfig.setup({
       -- list of servers for mason to install
       ensure_installed = {
-        "tsserver",
-        "html",
-        "cssls",
-        "tailwindcss",
-        "lua_ls",
-        "emmet_ls",
-        "gopls",
-        "clangd"
+      "gopls",           -- Go
+      "ast-grep",       -- was ast_grep
+      "lua_ls",         -- Lua
+      "cssls",          -- CSS
+      "tailwindcss",    -- Tailwind
+      "html",           -- HTML
+      "clangd",         -- C/C++
+      "emmet_ls",       -- Emmet
+      "rust_analyzer",  -- Rust
+      "tsserver",       -- was ts_ls - TypeScript/JavaScript
       },
     })
 
