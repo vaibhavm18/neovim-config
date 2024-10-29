@@ -13,6 +13,7 @@ return {
     treesitter.setup({ -- enable syntax highlighting
       highlight = {
         enable = true,
+ disable = { "c", "rust" },
       },
       -- enable indentation
       indent = { enable = true },
