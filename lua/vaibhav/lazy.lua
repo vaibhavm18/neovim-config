@@ -20,4 +20,8 @@ require("lazy").setup({ { import = "vaibhav.plugins" }, {import = "vaibhav.plugi
   change_detection = {
     notify = false,
   },
+  rocks = {
+    enabled = false,
+  }
+  
 })

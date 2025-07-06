@@ -36,7 +36,6 @@ return {
       "clangd",         -- C/C++
       "emmet_ls",       -- Emmet
       "rust_analyzer",  -- Rust
-      "tsserver",       -- was ts_ls - TypeScript/JavaScript
       },
     })
 
@@ -44,8 +43,6 @@ return {
       ensure_installed = {
         "prettier", -- prettier formatter
         "stylua", -- lua formatter
-        "isort", -- python formatter
-        "black", -- python formatter
         "pylint",
         "eslint_d",
       },
