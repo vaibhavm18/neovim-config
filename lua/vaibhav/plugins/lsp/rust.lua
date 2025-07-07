@@ -1,54 +1,48 @@
-
+-- plugins/rust.lua
 return {
-    "mrcjkb/rustaceanvim",
-    version = "^5",
-    lazy = false,
-    ft = "rust",
-    config = function()
-        vim.g.rustaceanvim = {
-            server = {
-                on_attach = function(_, bufnr)
-                    local keymap = vim.keymap
-                    
-                    local opts = { silent = false, buffer = bufnr }
-                    -- rust keymaps
-                    vim.keymap.set("n", "K", function()
-                        vim.cmd.RustLsp({ "hover", "actions" })
-                    end, opts)
-                    vim.keymap.set("n", "<leader>ca", function()
-                        vim.cmd.RustLsp("codeAction")
-                    end, opts)
-                    vim.keymap.set("n", "<leader>vt", function()
-                        vim.cmd.RustLsp("testables")
-                    end, opts)
-                    vim.keymap.set("n", "<leader>ve", function()
-                        vim.cmd.RustLsp("explainError")
-                    end, opts)
-                    vim.keymap.set("n", "<leader>vc", function()
-                        vim.cmd.RustLsp("openCargo")
-                    end, opts)
-                end,
-                settings = {
-                    ["rust-analyzer"] = {
-                        files = {
-                            excludeDirs = {
-                                "target",
-                                "node_modules",
-                                ".git",
-                                "src-tauri/target",
-                                "src-tauri/node_modules",
-                            },
-                        },
-                        cargo = {
-                            targetDir = "target/rust-analyzer",
-                            allFeature = true
-                        },
-                        procMacro = {
-                            enable = false,
-                        },
-                    },
-                },
-            },
-        }
-    end,
+  "mrcjkb/rustaceanvim",
+  version = "^5",        -- stick to the stable API
+  ft = "rust",           -- lazy-load on Rust files
+  config = function()
+    ---------------------------------------------------------------------------
+    -- Shared LSP goodies ------------------------------------------------------
+    ---------------------------------------------------------------------------
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+    ---@type rustaceanvim.Opts
+    vim.g.rustaceanvim = {
+      -- 1. TOOLS (runnables / code-actions UI, etc.)
+      tools = {
+        enable_clippy = true,                       -- run clippy on save
+        code_actions  = { ui_select_fallback = true }, -- nicer grouped actions
+      },
+
+      -- 2. SERVER (actual rust-analyzer settings)
+      server = {
+        capabilities = capabilities,
+        on_attach = function(_, bufnr)
+          -- quick keymaps – extend as you like
+          local nmap = function(keys, fn, desc)
+            vim.keymap.set("n", keys, fn, { buffer = bufnr, desc = "Rust: " .. desc })
+          end
+          nmap("K",         vim.lsp.buf.hover,         "Hover")
+          nmap("<leader>rn", vim.lsp.buf.rename,        "Rename")
+          nmap("<leader>ca", vim.lsp.buf.code_action,   "Code Action")
+        end,
+        settings = {
+          ["rust-analyzer"] = {
+            cargo = { allFeatures = true },
+            check = { command = "clippy" },            -- same as enable_clippy, but explicit
+            diagnostics = { enable = true },
+          },
+        },
+      },
+
+      -- 3. DAP (optional – only if you use nvim-dap)
+      dap = {
+        autoload_configurations = true,  -- default; set false if you don’t want auto-load
+      },
+    }
+  end,
 }
+
