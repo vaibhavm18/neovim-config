@@ -1,13 +1,22 @@
--- ~/.config/nvim/lua/vaibhav/plugins/lsp/lspconfig.lua
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "williamboman/mason.nvim",               -- Mason core
-    "williamboman/mason-lspconfig.nvim",     -- Mason <> lspconfig bridge
-    "hrsh7th/cmp-nvim-lsp",                  -- LSP completion source
+    "williamboman/mason.nvim",       -- Mason core
+    "williamboman/mason-lspconfig.nvim", -- Mason <> lspconfig bridge
+    "hrsh7th/cmp-nvim-lsp",          -- LSP completion source
     { "antosha417/nvim-lsp-file-operations", config = true },
-    { "folke/neodev.nvim", opts = {} },
+    {
+      "folke/lazydev.nvim",
+      ft = "lua", -- only load on lua files
+      opts = {
+        library = {
+          -- See the configuration section for more details
+          -- Load luvit types when the `vim.uv` word is found
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        },
+      },
+    },
   },
   config = function()
     ------------------------------------------------------------------
@@ -16,19 +25,18 @@ return {
     require("mason").setup()
     require("mason-lspconfig").setup({
       ensure_installed = {
-        "gopls",     -- Go
-        "emmet_ls",  -- Emmet for HTML/CSS/JSX
-        "lua_ls",    -- Lua
-        "ts_ls",     -- TypeScript (typescript-language-server)
-        "rust_analyzer"
+        "gopls",             -- Go
+        "emmet_ls",          -- Emmet for HTML/CSS/JSX
+        "lua_ls",            -- Lua
+        "ts_ls",             -- TypeScript (typescript-language-server)
       },
-      automatic_installation = true,  -- install servers if missing
-      automatic_enable = true,        -- auto-call vim.lsp.enable()
+      automatic_installation = true, -- install servers if missing
+      automatic_enable = true, -- auto-call vim.lsp.enable()
     })
 
     if vim.lsp.inlay_hint then
-  vim.lsp.inlay_hint.enable(true, { 0 })
-end
+      vim.lsp.inlay_hint.enable(true, { 0 })
+    end
 
 
     ------------------------------------------------------------------
@@ -46,17 +54,16 @@ end
         keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
         keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
         keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
-        keymap.set({ "n","v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+        keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
         keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
         keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
         keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
-        keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-        keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+        keymap.set("n", "]d", vim.diagnostic.get_next, opts)
+        keymap.set("n", "[d", vim.diagnostic.get_prev, opts)
         keymap.set("n", "K", vim.lsp.buf.hover, opts)
         keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
       end,
     })
-
     ------------------------------------------------------------------
     -- 3. Diagnostic Sign Icons
     ------------------------------------------------------------------
@@ -71,7 +78,7 @@ end
     ------------------------------------------------------------------
     -- 4. Capabilities (for nvim-cmp)
     ------------------------------------------------------------------
-    local capabilities = vim.tbl_deep_extend("force",
+    local capabilities                                               = vim.tbl_deep_extend("force",
       vim.lsp.protocol.make_client_capabilities(),
       require("cmp_nvim_lsp").default_capabilities()
     )
@@ -81,8 +88,8 @@ end
     ------------------------------------------------------------------
     -- 5. Per-Server Configuration
     ------------------------------------------------------------------
-    local lspconfig = require("lspconfig")
-    local util      = require("lspconfig/util")
+    local lspconfig                                                  = require("lspconfig")
+    local util                                                       = require("lspconfig/util")
 
     -- Go: gopls
     lspconfig.gopls.setup({
@@ -103,8 +110,8 @@ end
     lspconfig.emmet_ls.setup({
       capabilities = capabilities,
       filetypes    = {
-        "html","typescriptreact","javascriptreact",
-        "css","sass","scss","less","svelte",
+        "html", "typescriptreact", "javascriptreact",
+        "css", "sass", "scss", "less", "svelte",
       },
     })
 
@@ -127,3 +134,4 @@ end
     })
   end,
 }
+

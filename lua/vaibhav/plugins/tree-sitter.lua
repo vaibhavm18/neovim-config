@@ -11,9 +11,9 @@ return {
 
     -- configure treesitter
     treesitter.setup({ -- enable syntax highlighting
+      auto_install = true,
       highlight = {
         enable = true,
- disable = { "c", "rust" },
       },
       -- enable indentation
       indent = { enable = true },
@@ -37,16 +37,16 @@ return {
         "vim",
         "dockerfile",
         "gitignore",
-        "query",
         "vimdoc",
         "c",
         "cpp",
+        "rust"
       },
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
+          init_selection = "<C-i>",
+          node_incremental = "<C-i>",
           scope_incremental = false,
           node_decremental = "<bs>",
         },
@@ -54,3 +54,4 @@ return {
     })
   end,
 }
+

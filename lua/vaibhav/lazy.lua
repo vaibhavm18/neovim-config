@@ -12,16 +12,19 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ { import = "vaibhav.plugins" }, {import = "vaibhav.plugins.lsp"} }, {
-  checker = {
-    enabled = true,
-    notify = false,
-  },
-  change_detection = {
-    notify = false,
-  },
-  rocks = {
-    enabled = false,
-  }
-  
-})
+require("lazy").setup({ 
+  { import = "vaibhav.plugins" },
+  {import = "vaibhav.plugins.lsp"}
+},
+  {
+    checker = {
+      enabled = true,
+      notify = false,
+    },
+    change_detection = {
+      notify = false,
+    },
+    rocks = {
+      enabled = false,
+    }
+  })

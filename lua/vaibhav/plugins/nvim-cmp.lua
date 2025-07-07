@@ -1,7 +1,3 @@
--- configuration instructions
--- source: https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-get-types-on-the-left-and-offset-the-menu
-
--- options
 local settings = {
   theme = "neofusion", -- ayu|gruvbox|neofusion
   indentChar = "│", -- │, |, ¦, ┆, ┊
@@ -157,3 +153,4 @@ return {
     })
   end,
 }
+
