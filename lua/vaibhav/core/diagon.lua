@@ -2,10 +2,10 @@
 -- 1. Global defaults (inline bubbles everywhere)
 -------------------------------------------------------------------------------
 vim.diagnostic.config({
-  virtual_text = { spacing = 2, prefix = "●" },   -- inline bubbles
+  virtual_text = true,   -- inline bubbles
   virtual_lines = false,                          -- not using them
   underline = true,
-  update_in_insert = false,
+  update_in_insert = true,
   float = {                                       -- default for every float
     border = "rounded",
     source = "if_many",                            -- show which LSP
@@ -15,18 +15,18 @@ vim.diagnostic.config({
 -------------------------------------------------------------------------------
 -- 2. Hide the inline bubble on the cursor line
 -------------------------------------------------------------------------------
-local vt_cache
-vim.api.nvim_create_autocmd({ "CursorMoved", "DiagnosticChanged" }, {
-  group = vim.api.nvim_create_augroup("hide_cursorline_bubble", {}),
-  callback = function()
-    vt_cache = vt_cache or vim.diagnostic.config().virtual_text
-    local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
-    local has_diag = not vim.tbl_isempty(
-      vim.diagnostic.get(0, { lnum = lnum, severity = { min = vim.diagnostic.severity.WARN } })
-    )
-    vim.diagnostic.config({ virtual_text = has_diag and false or vt_cache })
-  end,
-})
+-- local vt_cache
+-- vim.api.nvim_create_autocmd({ "CursorMoved", "DiagnosticChanged" }, {
+--   group = vim.api.nvim_create_augroup("hide_cursorline_bubble", {}),
+--   callback = function()
+--     vt_cache = vt_cache or vim.diagnostic.config().virtual_text
+--     local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+--     local has_diag = not vim.tbl_isempty(
+--       vim.diagnostic.get(0, { lnum = lnum, severity = { min = vim.diagnostic.severity.WARN } })
+--     )
+--     vim.diagnostic.config({ virtual_text = has_diag and false or vt_cache })
+--   end,
+-- })
 
 -------------------------------------------------------------------------------
 -- 3. Show a floating window immediately on any line with Error | Warning
