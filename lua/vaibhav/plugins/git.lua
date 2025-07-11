@@ -13,7 +13,7 @@ return {
     keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", {desc = "Git preview"})
 
     local function map(mode, l, r, desc)
-      vim.keymap.set(mode, l, r, { buffer = bufnr, desc = "Git " + desc })
+      vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
     end
 
     -- Navigation
