@@ -7,7 +7,8 @@ return {
     ---------------------------------------------------------------------------
     -- Shared LSP goodies ------------------------------------------------------
     ---------------------------------------------------------------------------
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    local original_capabilities = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = require("blink.cmp").get_lsp_capabilities(original_capabilities)
 
     ---@type rustaceanvim.Opts
     vim.g.rustaceanvim = {
