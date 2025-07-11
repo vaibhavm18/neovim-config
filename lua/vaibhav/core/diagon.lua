@@ -31,6 +31,7 @@ vim.diagnostic.config({
 -------------------------------------------------------------------------------
 -- 3. Show a floating window immediately on any line with Error | Warning
 -------------------------------------------------------------------------------
+---
 local float_win
 vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
   group = vim.api.nvim_create_augroup("auto_float_diagnostics", {}),
@@ -57,13 +58,6 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
   end,
 })
 
--------------------------------------------------------------------------------
--- 4. Force a redraw when you change mode (prevents stale bubbles)
--------------------------------------------------------------------------------
-vim.api.nvim_create_autocmd("ModeChanged", {
-  group = vim.api.nvim_create_augroup("diagnostic_redraw_on_mode", {}),
-  callback = function() pcall(vim.diagnostic.show) end,
-})
 
 local map = { ['true']='false',  ['false']='true',
               ['True']='False',  ['False']='True',
@@ -75,5 +69,4 @@ local function toggle()
   if repl then vim.cmd('normal! ciw' .. repl) end
 end
 vim.keymap.set('n', '<leader>tt', toggle, { desc = 'Toggle boolean-like words' })
-
 
