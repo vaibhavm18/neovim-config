@@ -1,5 +1,5 @@
 -- plugins/rust.lua
-return {
+return {{
   "mrcjkb/rustaceanvim",
   version = "^5",        -- stick to the stable API
   ft = "rust",           -- lazy-load on Rust files
@@ -45,5 +45,28 @@ return {
       },
     }
   end,
-}
+}, {
 
+    'rust-lang/rust.vim',
+    ft = "rust",
+    init = function ()
+      vim.g.rustfmt_autosave = 1
+    end
+
+
+  },  {
+    'saecki/crates.nvim',
+    ft = {"toml"},
+    config = function()
+      require("crates").setup {
+        completion = {
+          cmp = {
+            enabled = true
+          },
+        },
+      }
+      -- require('blink-cmp').set setup.buffer({
+      --   sources = { { name = "crates" }}
+      -- })
+    end
+  },}

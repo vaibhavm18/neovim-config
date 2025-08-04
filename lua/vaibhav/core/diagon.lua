@@ -32,31 +32,31 @@ vim.diagnostic.config({
 -- 3. Show a floating window immediately on any line with Error | Warning
 -------------------------------------------------------------------------------
 ---
-local float_win
-vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-  group = vim.api.nvim_create_augroup("auto_float_diagnostics", {}),
-  callback = function()
-    -- close an old float if it’s still open
-    if float_win and vim.api.nvim_win_is_valid(float_win) then
-      vim.api.nvim_win_close(float_win, true)
-    end
-
-    local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
-    local diag  = vim.diagnostic.get(0, {
-      lnum = lnum,
-      severity = { min = vim.diagnostic.severity.WARN },  -- only Err + Warn
-    })
-    if vim.tbl_isempty(diag) then
-      return  -- nothing to show on this line
-    end
-
-    float_win = vim.diagnostic.open_float(nil, {
-      scope       = "cursor",
-      focusable   = false,
-      close_events = { "CursorMoved", "BufLeave", "InsertEnter", "WinLeave" },
-    })
-  end,
-})
+-- local float_win
+-- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+--   group = vim.api.nvim_create_augroup("auto_float_diagnostics", {}),
+--   callback = function()
+--     -- close an old float if it’s still open
+--     if float_win and vim.api.nvim_win_is_valid(float_win) then
+--       vim.api.nvim_win_close(float_win, true)
+--     end
+--
+--     local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+--     local diag  = vim.diagnostic.get(0, {
+--       lnum = lnum,
+--       severity = { min = vim.diagnostic.severity.WARN },  -- only Err + Warn
+--     })
+--     if vim.tbl_isempty(diag) then
+--       return  -- nothing to show on this line
+--     end
+--
+--     float_win = vim.diagnostic.open_float(nil, {
+--       scope       = "cursor",
+--       focusable   = false,
+--       close_events = { "CursorMoved", "BufLeave", "InsertEnter", "WinLeave" },
+--     })
+--   end,
+-- })
 
 
 local map = { ['true']='false',  ['false']='true',
