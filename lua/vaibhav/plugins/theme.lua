@@ -14,7 +14,7 @@ return {
   },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000,
     config = function ()
-     -- vim.cmd.colorscheme "catppuccin" 
+     vim.cmd.colorscheme "catppuccin-mocha" 
     end
   },
   {
@@ -22,7 +22,7 @@ return {
     name = "kanagawa",
     priority = 1000,
     config = function ()
-     vim.cmd.colorscheme "kanagawa-wave" 
+     -- vim.cmd.colorscheme "kanagawa-wave" 
     end
   }
 }

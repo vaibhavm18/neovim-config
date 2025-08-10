@@ -28,7 +28,8 @@ return {
     signature = { enabled = true },
 
     keymap = { 
-      -- preset = 'default',
+      preset = 'default',
+      ["<CR>"] = { "accept", "fallback" },
       ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<C-x>'] = { 'hide' },
 
@@ -43,8 +44,8 @@ return {
       ['<Tab>'] = { 'snippet_forward', 'fallback' },
       ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
 
+      
       ['<C-l>'] = { 'show_signature', 'hide_signature', 'fallback' },
-      -- ['<CR>'] = { 'select_and_accept' },
     },
 
     appearance = {
@@ -54,12 +55,12 @@ return {
     },
 
     -- (Default) Only show the documentation popup when manually triggered
-    completion = { documentation = { auto_show = false } },
+    completion = { documentation = { auto_show = true } },
 
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lsp', 'path', 'snippets', "buffer" },
+      default = { 'lsp', 'path', 'snippets', "buffer"},
     },
     cmdline = { completion = { ghost_text = { enabled = true } } },
 

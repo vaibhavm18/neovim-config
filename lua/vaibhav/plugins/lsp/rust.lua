@@ -59,14 +59,19 @@ return {{
     ft = {"toml"},
     config = function()
       require("crates").setup {
+        lsp = {
+          enabled = true,
+          completion = true,   -- enable LSP completions
+          actions = true,
+          hover = true,
+        },
         completion = {
-          cmp = {
-            enabled = true
+          crates = {           -- optional: crates.io name search
+            enabled = true,    -- default is false per docs
+            max_results = 8,
+            min_chars = 3,
           },
         },
       }
-      -- require('blink-cmp').set setup.buffer({
-      --   sources = { { name = "crates" }}
-      -- })
     end
   },}
