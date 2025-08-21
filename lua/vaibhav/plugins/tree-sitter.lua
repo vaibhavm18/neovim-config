@@ -42,16 +42,6 @@ return {
         "cpp",
         "rust"
       },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-i>",
-          node_incremental = "<C-i>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
     })
   end,
 }
-

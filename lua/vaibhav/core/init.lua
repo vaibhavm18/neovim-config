@@ -1,5 +1,2 @@
-require "vaibhav.core.options"
-require "vaibhav.core.keymaps"
-require "vaibhav.core.extra"
-require "vaibhav.core.diagon"
-require "vaibhav.core.spell"
+require("vaibhav.core.option")
+require("vaibhav.core.keymaps")

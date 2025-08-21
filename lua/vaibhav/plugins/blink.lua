@@ -44,7 +44,7 @@ return {
       ['<Tab>'] = { 'snippet_forward', 'fallback' },
       ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
 
-      
+
       ['<C-l>'] = { 'show_signature', 'hide_signature', 'fallback' },
     },
 

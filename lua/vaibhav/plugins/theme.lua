@@ -13,16 +13,22 @@ return {
     {'shaunsingh/nord.nvim'}
   },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000,
-    config = function ()
-     vim.cmd.colorscheme "catppuccin-mocha" 
-    end
+  config = function ()
+    vim.cmd.colorscheme "catppuccin-mocha" 
+  end
+},
+{
+  "rebelot/kanagawa.nvim",
+  name = "kanagawa",
+  priority = 1000,
+  config = function ()
+    -- vim.cmd.colorscheme "kanagawa-wave" 
+  end
   },
-  {
-    "rebelot/kanagawa.nvim",
-    name = "kanagawa",
+  { "savq/melange-nvim",
     priority = 1000,
     config = function ()
-     -- vim.cmd.colorscheme "kanagawa-wave" 
+      -- vim.cmd.colorscheme "melange" 
     end
   }
 }
