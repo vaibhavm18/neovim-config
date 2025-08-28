@@ -1,7 +1,7 @@
 return {
 	"ibhagwan/fzf-lua",
 	-- optional icon support (remove if you don't use an icon provider)
-	dependencies = { "echasnovski/mini.icons" },
+	dependencies = { "nvim-mini/mini.icons" },
 
 	-- plugin options (see fzf-lua docs for full list)
 	opts = {
