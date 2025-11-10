@@ -2,6 +2,8 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
+keymap.set({ "n", "i", "v", "c" }, "<C-[>", "<Esc>", { desc = "Ctrl+[ as Esc" })
+keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 keymap.set("n", "<leader>ww", ":w<CR>", { desc = "Save file" })
 keymap.set("n", "<leader>we", ":Ex<CR>", { desc = "Open file explorer" })
 keymap.set("n", "<leader>ws", ":so<CR>", { desc = "Source current file" })
@@ -26,5 +28,3 @@ keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll half-page up and center cur
 
 keymap.set("n", "n", "nzzzv", { desc = "Go to next search match, center and open folds" })
 keymap.set("n", "N", "Nzzzv", { desc = "Go to previous search match, center and open folds" })
-
-keymap.set("n", "-", "<cmd>Oil --float<CR>")

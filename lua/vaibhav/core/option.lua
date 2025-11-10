@@ -8,11 +8,10 @@ opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
 opt.shiftwidth = 2 -- 2 spaces for indent width
 opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
-opt.undodir  = undodir
+opt.undodir = undodir
 opt.undofile = true
 
-
-opt.scrolloff = 8;
+opt.scrolloff = 8
 opt.incsearch = true
 
 opt.undofile = true
@@ -22,15 +21,16 @@ opt.swapfile = false
 opt.incsearch = true
 opt.termguicolors = true
 
+opt.cmdheight = 2
+
 vim.cmd("let g:netrw_liststyle = 3")
 vim.diagnostic.config({
-  update_in_insert = true,
+	update_in_insert = true,
 })
 
 if vim.lsp.inlay_hint then
-  vim.lsp.inlay_hint.enable(true, { 0 })
+	vim.lsp.inlay_hint.enable(true, { 0 })
 end
 
 local undodir = vim.fn.expand("~/.local/state/nvim/undo")
 vim.fn.mkdir(undodir, "p")
-
