@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
-keymap.set({ "n", "i", "v", "c" }, "<C-[>", "<Esc>", { desc = "Ctrl+[ as Esc" })
+keymap.set({ "n", "i", "v", "c" }, "<C-]>", "<Esc>", { desc = "Ctrl+] as Esc" })
 keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 keymap.set("n", "<leader>ww", ":w<CR>", { desc = "Save file" })
 keymap.set("n", "<leader>we", ":Ex<CR>", { desc = "Open file explorer" })

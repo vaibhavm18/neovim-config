@@ -161,6 +161,8 @@ return {
 		--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 		local original_capabilities = vim.lsp.protocol.make_client_capabilities()
 		local capabilities = require("blink.cmp").get_lsp_capabilities(original_capabilities)
+		require("vaibhav.plugins.lsp.test.test_lsp").setup(capabilities)
+
 		-- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
 		-- Enable the following language servers
@@ -172,34 +174,54 @@ return {
 		--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 		--  - settings (table): Override the default settings passed when initializing the server.
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-		local servers = {
-			bashls = {},
-			marksman = {},
-			clangd = {},
-			-- gopls = {},
-			-- pyright = {},
-			-- rust_analyzer = {},
-			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-			--
-			-- Some languages (like typescript) have entire language plugins that can be useful:
-			--    https://github.com/pmizio/typescript-tools.nvim
-			--
-			-- But for many setups, the LSP (`ts_ls`) will work just fine
-			ts_ls = {
-				filetypes = { ".jsx", ".tsx", ".js", ".ts" },
-			},
-
-			lua_ls = {
-				settings = {
-					Lua = {
-						completion = {
-							callSnippet = "Replace",
-						},
-					},
-				},
-			},
-		}
-
+		-- local vue_language_server_path = vim.fn.expand("$MASON/packages")
+		-- 	.. "/vue-language-server/node_modules/@vue/language-server"
+		--
+		-- local tsserver_filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
+		--
+		-- local vue_plugin = {
+		-- 	name = "@vue/typescript-plugin",
+		-- 	location = vue_language_server_path,
+		-- 	languages = { "vue" },
+		-- 	configNamespace = "typescript",
+		-- }
+		--
+		-- local servers = {
+		-- 	bashls = {},
+		-- 	marksman = {},
+		-- 	clangd = {},
+		-- 	-- gopls = {},
+		-- 	-- pyright = {},
+		-- 	-- rust_analyzer = {},
+		-- 	-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
+		-- 	--
+		-- 	-- Some languages (like typescript) have entire language plugins that can be useful:
+		-- 	--    https://github.com/pmizio/typescript-tools.nvim
+		-- 	--
+		-- 	-- But for many setups, the LSP (`ts_ls`) will work just fine
+		-- 	vtsls = {
+		-- 		filetypes = tsserver_filetypes,
+		-- 		settings = {
+		-- 			vtsls = {
+		-- 				tsserver = {
+		-- 					globalPlugins = { vue_plugin },
+		-- 				},
+		-- 			},
+		-- 		},
+		-- 	},
+		-- 	vue_ls = {},
+		--
+		-- 	lua_ls = {
+		-- 		settings = {
+		-- 			Lua = {
+		-- 				completion = {
+		-- 					callSnippet = "Replace",
+		-- 				},
+		-- 			},
+		-- 		},
+		-- 	},
+		-- }
+		--
 		-- Ensure the servers and tools above are installed
 		--
 		-- To check the current status of installed tools and/or manually install
@@ -234,6 +256,42 @@ return {
 					require("lspconfig")[server_name].setup(server)
 				end,
 			},
+		})
+
+		local vue_language_server_path = vim.fn.expand("$MASON/packages")
+			.. "/vue-language-server/node_modules/@vue/language-server"
+
+		local tsserver_filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
+
+		local vue_plugin = {
+			name = "@vue/typescript-plugin",
+			location = vue_language_server_path,
+			languages = { "vue" },
+			configNamespace = "typescript",
+		}
+
+		vim.lsp.config("vtsls", {
+			filetypes = tsserver_filetypes,
+			settings = {
+				vtsls = {
+					tsserver = {
+						globalPlugins = { vue_plugin },
+					},
+				},
+			},
+		})
+
+		vim.lsp.config("vue_ls", {
+			-- on recent nvim-lspconfig you can leave this empty
+		})
+
+		-- enable (must happen after vim.lsp.config)
+		vim.lsp.enable({
+			"vue_ls",
+			"vtsls",
+			"tailwindcss",
+			"emmet_ls",
+			-- add other servers you actually use
 		})
 	end,
 }

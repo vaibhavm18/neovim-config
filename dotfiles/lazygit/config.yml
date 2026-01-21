@@ -1,0 +1,103 @@
+#          ╭──────────────────────────────────────────────────────────╮
+#          │                      LazyGit Config                      │
+#          ╰──────────────────────────────────────────────────────────╯
+
+# GUI options
+gui:
+  # Customize the colorscheme
+  # Catppuccin Mocha - Green
+  # See: https://github.com/catppuccin/lazygit
+  # See: https://github.com/catppuccin/lazygit/blob/main/themes-mergable/mocha/green.yml
+  theme:
+    activeBorderColor:
+      - "#a6e3a1"
+      - bold
+    inactiveBorderColor:
+      - "#a6adc8"
+    optionsTextColor:
+      - "#89b4fa"
+    selectedLineBgColor:
+      - "#16161f"
+      - bold
+    cherryPickedCommitBgColor:
+      - "#45475a"
+    cherryPickedCommitFgColor:
+      - "#a6e3a1"
+    unstagedChangesColor:
+      - "#f38ba8"
+    defaultFgColor:
+      - "#cdd6f4"
+    searchingActiveBorderColor:
+      - "#f9e2af"
+
+  # Customize the color highlights of the author
+  authorColors:
+    "rootiest": "#ff6e96"
+    "*": "#b4befe"
+
+  # Customize the color highlights of the branch
+  branchColors:
+    "docs": "#11aaff"
+    "dev*": "#ebad6c"
+    "main": "#af92fc"
+    "master": "#af92fc"
+
+  # Use latest Nerd Fonts glyphs
+  # Requires: https://github.com/ryanoasis/nerd-fonts
+  nerdFontsVersion: "3"
+
+  # Show arrows for commits that diverge from the base branch
+  showDivergenceFromBaseBranch: onlyArrow
+
+  # Filter mode: When searching/filtering, use fuzzy matching
+  filterMode: fuzzy
+
+  spinner:
+    # The frames of the spinner animation.
+    frames:
+      - "⠋"
+      - "⠙"
+      - "⠩"
+      - "⠸"
+      - "⠼"
+      - "⠴"
+      - "⠦"
+      - "⠧"
+    # The "speed" of the spinner in milliseconds.
+    rate: 60
+
+update:
+  # One of: 'prompt' (default) | 'background' | 'never'
+  method: background
+
+  # Period in days between update checks
+  days: 2
+
+# Background refreshes
+refresher:
+  # File/submodule refresh interval in seconds.
+  refreshInterval: 10
+
+  # Re-fetch interval in seconds.
+  fetchInterval: 60
+
+os:
+  # editPreset: nvim-remote
+  open: xdg-open {{filename}} >/dev/null
+  openLink: xdg-open {{link}} >/dev/null
+  copyToClipboardCmd: printf "\033]52;c;$(printf {{text}} | base64)\a" > /dev/tty
+  editPreset: nvim-remote
+  editInTerminal: true
+
+# Hide the startup popup
+disableStartupPopups: true
+
+# Don't prompt to return from subprocess when closing child processes (commitizen, etc)
+promptToReturnFromSubprocess: false
+
+git:
+  paging:
+    # Displays inline diff with syntax highlighting
+    # Requires: https://github.com/Wilfred/difftastic
+    externalDiffCommand: difft --color=always --display=inline --syntax-highlight=on --tab-width=2
+

@@ -1,0 +1,115 @@
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$git_metrics\
+$fill\
+$package\
+$c\
+$golang\
+$lua\
+$python\
+$aws\
+$nodejs\
+$rust\
+$cmd_duration $jobs $time\
+$line_break\
+$character"""
+
+[git_commit]
+commit_hash_length = 4
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+
+[rust]
+format = "[$symbol ($version )]($style)"
+
+[fill]
+symbol = " "
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vicmd_symbol = "[❮](green)"
+
+[git_branch]
+symbol = ""
+
+[git_state]
+
+[git_metrics]
+disabled = false
+
+[directory]
+style = "blue"
+read_only = " "
+truncation_length = 0
+truncate_to_repo = false
+
+[git_status]
+conflicted = '= → ${count}  ' # This branch has merge conflicts.
+ahead = ' → ${count}  '
+behind = ' → ${count}  '
+diverged = '󱡷 → ${count}  '
+up_to_date = ' '
+untracked = '? → ${count}  '
+stashed = ' → ${count}  '
+modified = ' → ${count}  '
+staged = ' → ${count}  '
+renamed = '» → ${count}  '
+deleted = '✘ → ${count}  '
+format = '([$all_status$ahead_behind]($style))'
+
+[jobs]
+symbol = ""
+style = "bold red"
+number_threshold = 1
+format = "[$symbol]($style)"
+
+[cmd_duration]
+format = "[$duration]($style)"
+style = "yellow"
+
+[package]
+format = '[$symbol$version]($style) '
+symbol = '📦 '
+version_format = 'v${raw}'
+style = 'bold 208'
+display_private = false
+disabled = false
+
+[aws]
+symbol = ""
+format = "[$symbol ($version )]($style)"
+
+[c]
+symbol = ""
+format = "[$symbol ($version )]($style)"
+
+[golang]
+symbol = ""
+format = "[$symbol ($version )]($style)"
+
+[lua]
+symbol = ""
+format = "[$symbol  ($version )]($style)"
+
+[python]
+symbol = ""
+format = "[$symbol ($version )]($style)"
+
+[time]
+disabled = false
+style = "bold white"
+format = "[$time]($style)"
+
+[custom.stunnel]
+when = "ps aux | grep stunnel | grep -v grep"
+command = "ps -o etime= -p $(ps aux | grep stunnel | grep -v grep | awk '{print $2}')"
+style = "red"
+format = "[TUNNEL OPEN for $output]($style)"

@@ -1,0 +1,42 @@
+[
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "ctrl+e"
+  },
+  {
+    "command": "workbench.files.action.focusFilesExplorer",
+    "key": "ctrl+e",
+    "when": "editorTextFocus"
+  },
+  {
+    "command": "workbench.action.focusNextGroup",
+    "key": "ctrl+m"
+  },
+  {
+    "command": "workbench.action.closeActiveEditor",
+    "key": "ctrl+-"
+  },
+  {
+    "command": "",
+    "key": "ctrl++"
+  },
+  {
+    "key": "n",
+    "command": "explorer.newFile",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "command": "renameFile",
+    "key": "r",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "command": "deleteFile",
+    "key": "d",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "composerMode.agent"
+  }
+]

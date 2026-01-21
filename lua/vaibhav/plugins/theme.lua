@@ -59,8 +59,8 @@ return {
 			},
 		},
 		config = function(_, opts)
-			require("catppuccin").setup(opts)
-			vim.cmd.colorscheme("catppuccin-macchiato")
+			-- require("catppuccin").setup(opts)
+			-- vim.cmd.colorscheme("catppuccin-macchiato")
 		end,
 	},
 	{
@@ -112,7 +112,7 @@ return {
 		},
 		config = function(_, opts)
 			require("kanagawa").setup(opts)
-			-- vim.cmd.colorscheme("kanagawa-wave")
+			vim.cmd.colorscheme("kanagawa-wave")
 		end,
 	},
 	{
